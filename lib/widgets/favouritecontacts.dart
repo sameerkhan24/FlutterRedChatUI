@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_chat_ui_starter/models/message_model.dart';
+import 'package:flutter_chat_ui_starter/screens/chatsscreen.dart';
 
 class FavouriteContacts extends StatelessWidget {
   @override
@@ -40,24 +41,32 @@ class FavouriteContacts extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 itemCount: favorites.length,
                 itemBuilder: (BuildContext context,int index){
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 35,
-                          backgroundImage: AssetImage(favorites[index].imageUrl),
-                        ),
-                        SizedBox(height: 6,),
-                        Text(
-                          favorites[index].name,
-                          style: TextStyle(
-                            color: Colors.blueGrey,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600
+                  return GestureDetector(
+                    onTap: () => Navigator.push(
+                  context, 
+                  MaterialPageRoute(
+                    builder: (_)=> ChatScreen(user: favorites[index],),
+                    ),
+                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          CircleAvatar(
+                            radius: 35,
+                            backgroundImage: AssetImage(favorites[index].imageUrl),
                           ),
-                          ),
-                      ],
+                          SizedBox(height: 6,),
+                          Text(
+                            favorites[index].name,
+                            style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600
+                            ),
+                            ),
+                        ],
+                      ),
                     ),
                   );
                 },
